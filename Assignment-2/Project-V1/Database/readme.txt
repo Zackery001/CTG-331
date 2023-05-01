@@ -1,0 +1,1 @@
+This SQL query was used to make the required tables for the "userdata" database.
