@@ -29,13 +29,13 @@
                     <input class = "form-control" type="text" name = "username" required>
                     <label class = "mt-2">Enter your gmail address :</label>
                     <input class = "form-control" type="text" name = "email" required>
-                    <label class="mt-2 mb-1">Enter your birth year :</label>
                     <label class = "mt-2">Enter a password :</label>
                     <input class = "form-control" type="password" name = "password" required>
+                    <label class="mt-2 mb-1">Enter your birth year :</label>
                     <div class="row mt-3 ps-3">
                         <input class="btn btn-bg col-md-4" type = "number" name = "age" placeholder = "Birth year" required>
                     </div>
-                    <div class = "mt-1" ><a class = "btn btn-success btn-sm" href="index.php">Go To Home (⌐■_■)</a></div>
+                    <div class = "mt-4" ><a class = "btn btn-success btn-sm" href="index.php">Go To Home (⌐■_■)</a></div>
                     <div class = "d-grid gap-2 col-6 mx-auto">
                         <input class = "btn btn-primary btn-success mt-5" type="submit" 
                         name = "register" value = "Register">

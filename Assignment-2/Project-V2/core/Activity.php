@@ -30,5 +30,15 @@ class Activity extends Database{
          FROM posts JOIN users ON users.id = posts.user_id";
         return $this->fetch($sql);
     }
+    public function details($q_id){
+        $sql = "SELECT * FROM posts WHERE id='$q_id' ";
+        return $this->fetch($sql);
+    }
+    public function getUser($u_id){
+        $sql = "SELECT username FROM users WHERE id = '$u_id' ";
+        return $this->fetch($sql);
+    }
+
 }
+
 ?>

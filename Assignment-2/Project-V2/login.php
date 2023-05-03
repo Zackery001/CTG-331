@@ -34,7 +34,7 @@
                         <label >Enter your password :</label>
                         <input class = "form-control" type="password" name = "password" required>
                     </div>
-                    <div class = "mt-1" ><a class = "btn btn-success btn-sm" href="index.php">Go To Home (⌐■_■)</a></div>
+                    <div class = "mt-4" ><a class = "btn btn-success btn-sm" href="index.php">Go To Home (⌐■_■)</a></div>
                     <div class = "d-grid gap-2 col-6 mx-auto">
                         <input class = "btn btn-primary btn-success mt-5" type="submit" 
                         name = "submit" value = "Login">
