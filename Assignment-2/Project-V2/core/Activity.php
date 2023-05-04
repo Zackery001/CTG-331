@@ -38,6 +38,13 @@ class Activity extends Database{
         $sql = "SELECT username FROM users WHERE id = '$u_id' ";
         return $this->fetch($sql);
     }
+    public function addComment($u_id, $q_id,$comment){
+        $created_at = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO comments (user_id, post_id, created_at, details) 
+            VALUES ('$u_id', '$q_id', '$created_at','$comment')" ;
+
+        $this->exec($sql);
+    }
 
 }
 

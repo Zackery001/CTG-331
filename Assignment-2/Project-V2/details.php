@@ -44,4 +44,30 @@
     </div>
 </div>
 
+<div class="container mt-3">
+    <div class="row">
+       <div class="col-8 offset-2 card">
+            <h5>Comment Section :</h5>
+            <?php if(isset($_SESSION['username'])): ?>
+                
+                <?php
+
+                    if(isset($_POST['submit'])){
+                        $post->addComment($_SESSION['user_id'], $details['id'], $_POST['details']);
+                        echo "<p class='alert alert-success'>
+                            Your comment has been successfully posted!</p>";
+                    }
+                
+                ?>
+
+            <form class = "form-group" action="" method="POST">
+                <textarea name = "details" id = "textarea" class = "border border-primary mt-2 form-control" rows="1"></textarea>
+                <input type = "submit" name = "submit" value = "Comment" class = "mt-2 mb-1 btn btn-sm btn-success">
+            </form>
+
+            <?php endif; ?>
+       </div>
+    </div>
+</div>
+
 <?php include 'element/footer.php'; ?>
