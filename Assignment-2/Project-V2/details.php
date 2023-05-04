@@ -28,14 +28,15 @@
 ?>
 
 
-<div class="container">
+<div class="container mt-3">
     <div class="row">
        <div class="col-8 offset-2 card">
 
-            <h5>Post by : <?= $user['username']?></h5>
+            <h5 style="background-color:powderblue;">Post by : <?= $user['username']?></h5>
             <h3><?= $details['title'] ?></h3>
 
-            <div class="border border-primary">
+            <div class = "mt-3">
+                <h5>Description :</h5>
                 <?= $details['description'] ?>
             </div>
 
