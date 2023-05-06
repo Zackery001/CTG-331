@@ -45,6 +45,12 @@ class Activity extends Database{
 
         $this->exec($sql);
     }
+    public function getComments($q_id){    
+        $sql = "SELECT comments.*, users.username FROM comments JOIN users ON users.id = comments.user_id
+            WHERE post_id = '$q_id' ";
+
+        return $this->fetch($sql);
+    }
 
 }
 
