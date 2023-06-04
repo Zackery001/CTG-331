@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->enum('status', ['pending', 'complete'])->default('pending');
+            $table->enum('delete', ['true', 'false'])->default('false');
             $table->timestamps();
         });
     }
