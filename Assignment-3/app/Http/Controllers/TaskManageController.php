@@ -30,7 +30,9 @@ class TaskManageController extends Controller
 
     public function index()
     {
-        $allTask = Task::where('status', 'pending')->get();
+        $allTask = Task::where('status', 'pending')
+                    ->where('delete', 'false')
+                    ->get();
         
         return view('welcome', compact('allTask'));
     }
@@ -40,6 +42,12 @@ class TaskManageController extends Controller
         $completedTask = Task::where('status', 'complete')->get();
 
         return view('completed', compact('completedTask'));
+    }
+
+    public function bin()
+    {
+        $deletedTask = Task::where('delete', 'true')->get();       
+        return view('recycleBin', compact('deletedTask'));
     }
 
     public function show($id)
@@ -56,9 +64,9 @@ class TaskManageController extends Controller
         ]);
         
         $task = Task::find($id);
-        $task->update([            
-                'title' => request('title'),
-                'description' => request('description')               
+        $task->update([         
+            'title' => request('title'),
+            'description' => request('description')               
         ]);
 
         return redirect()->route('welcome')->with('message', 'Task updated successfully!');
@@ -68,16 +76,40 @@ class TaskManageController extends Controller
     {
         Task::find($id)->delete();
 
-        return redirect()->route('welcome')->with('message', 'Task deleted successfully!');
+        return redirect()->route('bin')->with('message', 'Task deleted successfully!');
     }
 
+    public function remove($id)
+    {
+
+        $task = Task::find($id);
+
+        $task->delete = 'true';
+        $task->save();
+
+        return redirect()->route('welcome')->with('message', 'Task moved to recycle bin.');
+    }
+
+    public function restore($id)
+    {
+
+        $task = Task::find($id);
+
+        $task->delete = 'false';
+        $task->save();
+
+
+        return redirect()->back()->with('success', 'Task restored successfully.');
+    }
+    
     public function updateStatus($id, $status)
     {
         $task = Task::find($id);
-        $task->update([
-           'status' => $status
-        ]);
 
-        return redirect()->route('welcome')->with('message', 'Task updated successfully!');
+        $task->status = $status;
+        $task->save();
+
+        return redirect()->back()->with('success', 'Task status updated successfully.');
     }
+
 }

@@ -7,9 +7,9 @@
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page"
-                        href="{{ route('create.show') }}">Add</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('completed') }}">Completed</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('create.show') }}">Add</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('completed') }}">Completed</a></li>
+                <li class="nav-item"><a class="ms-5 nav-link" href="{{ route('bin') }}">Recycle Bin</a></li>
             </ul>
         </div>
     </div>
