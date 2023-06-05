@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//User Authentication Routes
+Route::get('register', [UserAuthController::class, 'index'])->name('register.show');
+Route::post('register', [UserAuthController::class, 'register'])->name('register');
+
+//Task Management Routes
 Route::get('/', [TaskManageController::class, 'index'])->name('welcome');
 Route::get('/completed', [TaskManageController::class, 'completed'])->name('completed');
 
