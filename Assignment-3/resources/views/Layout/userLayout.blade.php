@@ -13,14 +13,11 @@
             <div class="row">
                 <div class="col 12">
 
-                    @include('includes.navbar')
                     @yield('content')
 
                 </div>
             </div>
         </div>
-        
-        @push('js')
-
+        @stack('js')
     </body>
 </html>

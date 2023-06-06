@@ -1,6 +1,7 @@
 @extends('Layout.userLayout')
 
 @section('title', 'Task Manager')
+@include('includes.navbar')
 
 @section('content')
     <h2>Hello User</h2>

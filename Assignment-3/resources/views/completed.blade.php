@@ -1,6 +1,7 @@
 @extends('Layout.userLayout')
 
 @section('title', 'Completed')
+@include('includes.navbar')
 
 @section('content')
     <h2>Welcome to Completed Task Page</h2>

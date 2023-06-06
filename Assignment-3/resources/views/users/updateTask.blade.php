@@ -1,6 +1,7 @@
 @extends('Layout.userLayout')
 
 @section('title', 'Update')
+@include('includes.navbar')
 
 @section('content')
 
