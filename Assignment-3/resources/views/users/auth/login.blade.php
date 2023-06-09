@@ -5,8 +5,8 @@
 @section('content')
 
 @if (session('message'))
-  <div class="alert alert-success">
-      {{ session('message') }}
+  <div class="alert alert-{{ session('type') }}">
+      {!! session('message') !!}
   </div>
 @endif
 
@@ -20,6 +20,7 @@
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+                @include('errors.error')
 
                 <form class="mx-1 mx-md-4" action="{{ route('login') }}" method="POST">
                   {{ csrf_field() }}
@@ -27,16 +28,16 @@
                   <div class="d-flex flex-row align-items-center">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" class="form-control" />
-                      <label class="form-label" for="form3Example1c">Username</label>
+                      <input type="text" class="form-control" name="username"/>
+                      <label class="form-label">Username</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mt-4 mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" />
-                      <label class="form-label" for="form3Example4c">Password</label>
+                      <input type="password" class="form-control" name="password"/>
+                      <label class="form-label">Password</label>
                     </div>
                   </div>
 

@@ -4,7 +4,10 @@
 @include('includes.navbar')
 
 @section('content')
-    <h2>Hello User</h2>
+
+    @if(Auth::check())
+        <h2>Hello {{ Auth::user()->username }}</h2>
+    @endif
 
     @if (session('message'))
         <div class="alert alert-success">
@@ -21,7 +24,11 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $task->title }}</h5>
                 <p class="card-text">{{ $task->description }}</p>
-                <a href="{{ route('edit.show',[$task->id]) }}" class="btn btn-sm btn-light">Update</a>
+                @if(Auth::user()->verified == 1)
+                    <a href="{{ route('edit.show',[$task->id]) }}" class="btn btn-sm btn-light">Update</a>
+                @else
+                    <a href="#" class="btn btn-sm btn-light disabled">Update</a>
+                @endif
                 <a href="{{ route('remove',[$task->id]) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to move the task to recycle bin?')">Remove</a>
             </div>
         </div>

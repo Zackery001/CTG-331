@@ -45,4 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Sending email to user to verify their account
+    public function verify()
+    {
+        return $this->hasOne(UserVerification::class);
+    }
 }

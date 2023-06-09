@@ -16,7 +16,11 @@
         <div class="card mt-2">
             <div class="card-header">
                 Task ID: {{ $task->id }}
-                <div class="float-left"><a href="{{ route('restore',[$task->id]) }}" onclick="return confirm('Are you sure you want to restore the task?')" class="btn btn-sm btn-warning">Restore</a></div>
+                @if (Auth::user()->verified == 1) 
+                    <div class="float-left"><a href="{{ route('restore',[$task->id]) }}" onclick="return confirm('Are you sure you want to restore the task?')" class="btn btn-sm btn-warning">Restore</a></div>
+                @else
+                    <button class="float-left disabled">Verify account to restore task from recycle bin</button>
+                @endif
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ $task->title }}</h5>

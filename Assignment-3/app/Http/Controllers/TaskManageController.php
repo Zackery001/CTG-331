@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class TaskManageController extends Controller
@@ -13,8 +14,8 @@ class TaskManageController extends Controller
     {
         $allTask = Task::where('status', 'pending')
             ->where('delete', 'false')
-            ->get();
-
+            ->where('user_id', Auth::id())
+            ->paginate(10); // 10 tasks per page
         /*
         Retrieving tasks that have status of pending and delete set to false from the database
         Sending the retrieved tasks to welcome
@@ -40,7 +41,8 @@ class TaskManageController extends Controller
         //Creating a new task
         Task::create([
             'title' => request('title'),
-            'description' => request('description')
+            'description' => request('description'),
+            'user_id' => Auth::id()
         ]);
 
         return redirect()->route('welcome')->with('message', 'Task created successfully!');
@@ -52,7 +54,7 @@ class TaskManageController extends Controller
         Retrieving tasks that have status of completed from the database
         Sending the retrieved tasks to the completed page
         */
-        $completedTask = Task::where('status', 'complete')->get();
+        $completedTask = Task::where('status', 'complete')->where('user_id', Auth::id())->paginate(10);
 
         return view('completed', compact('completedTask'));
     }
@@ -60,11 +62,11 @@ class TaskManageController extends Controller
     public function show($id)
     {
         /*
-        Retrieving information about the data that the user has selected to update from the database
-        Sending the retrieved tasks to the update task page
-        */
-        $task=Task::find($id);
-        return view('users.updateTask', compact('task'));   
+    Retrieving information about the data that the user has selected to update from the database
+    Sending the retrieved tasks to the update task page
+    */
+        $task = Task::where('user_id', Auth::id())->where('id', $id)->firstOrFail();
+        return view('users.updateTask', compact('task'));
     }
 
     public function update($id)
@@ -91,7 +93,7 @@ class TaskManageController extends Controller
         Retrieving tasks delete set to true from the database
         Sending the retrieved tasks to the recycle bin
         */
-        $deletedTask = Task::where('delete', 'true')->get();
+        $deletedTask = Task::where('delete', 'true')->where('user_id', Auth::id())->get();
         return view('recycleBin', compact('deletedTask'));
     }
 
@@ -99,7 +101,7 @@ class TaskManageController extends Controller
     {
 
         //Updated the delete felid of the selected task to true
-        $task = Task::find($id);
+        $task = Task::where('user_id', Auth::id())->where('id', $id)->firstOrFail();;
 
         $task->delete = 'true';
         $task->save();
@@ -110,20 +112,20 @@ class TaskManageController extends Controller
     public function restore($id)
     {
 
-        //Updated the delete felid of the selected task to false
-        $task = Task::find($id);
+        //Updated the delete field of the selected task to false
+        $task = Task::where('user_id', Auth::id())->where('id', $id)->firstOrFail();;
 
-        $task->delete = 'false';
-        $task->save();
+        $task->update([
+            'delete' => 'false'
+        ]);
 
-
-        return redirect()->back()->with('success', 'Task restored successfully.');
+        return redirect()->route('welcome')->with('success', 'Task restored successfully.');
     }
 
     public function delete($id)
     {
         //Permanent Deletion Function
-        Task::find($id)->delete();
+        Task::where('user_id', Auth::id())->where('id', $id)->firstOrFail()->delete();
 
         return redirect()->route('bin')->with('message', 'Task deleted successfully!');
     }
